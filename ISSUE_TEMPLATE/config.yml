@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Soru ve tartışma / Questions & discussion"
+    url: https://github.com/orgs/Greater-Turkiye/discussions
+    about: "Genel sorular, yöntem tartışmaları ve fikirler için Tartışmalar'ı kullanın. / Use Discussions for general questions, methodology and ideas."
+  - name: "Kaldırma talebi, hassas içerik veya güvenlik açığı / Takedown, sensitive content or vulnerability"
+    url: https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md
+    about: "Kaldırma talepleri ve hassas içerik (kişisel veri, sızıntı, Türk kuvvetlerine ait bilgi) ASLA herkese açık issue olarak açılmaz; güvenlik politikasındaki özel kanalı kullanın. / Takedown requests and sensitive content (personal data, leaks, Turkish forces information) must NEVER be opened as a public issue; use the private channel in the security policy."

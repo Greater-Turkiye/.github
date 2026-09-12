@@ -1,0 +1,38 @@
+name: "Düzeltme / Correction"
+description: "Yayımlanmış bir kayıttaki hatayı bildirin. / Report an error in a published record."
+title: "[Düzeltme / Correction] "
+labels: ["correction", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Hata kişisel veri, sızıntı veya Türk kuvvetlerine ait bilgi içeriyorsa bu formu **kullanmayın**; [özel kanaldan](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md) bildirin.
+        If the error involves personal data, leaks or Turkish forces information, do **not** use this form; report it through the [private channel](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md).
+  - type: input
+    id: record_id
+    attributes:
+      label: "Kayıt kimliği / Record ID"
+      placeholder: "evt_..."
+    validations:
+      required: true
+  - type: textarea
+    id: whats_wrong
+    attributes:
+      label: "Ne yanlış? / What is wrong?"
+      description: "Hangi alan, mevcut değer ve neden yanlış olduğu. / Which field, the current value, and why it is wrong."
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_fix
+    attributes:
+      label: "Önerilen düzeltme / Proposed fix"
+    validations:
+      required: false
+  - type: textarea
+    id: evidence_urls
+    attributes:
+      label: "Kanıt bağlantıları / Evidence URLs"
+      description: "Her satıra bir bağlantı; mümkünse arşiv bağlantısıyla. / One URL per line, with archive links where possible."
+      render: text
+    validations:
+      required: true

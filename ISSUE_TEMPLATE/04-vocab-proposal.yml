@@ -1,0 +1,68 @@
+name: "Sözlük önerisi / Vocabulary proposal"
+description: "Kontrollü sözlüklere yeni bir kod ekleyin veya mevcut bir kodu değiştirin. / Add a new code to a controlled vocabulary or change an existing one."
+title: "[Sözlük / Vocab] "
+labels: ["vocab-proposal", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Kodlar küçük harf ve tire ile yazılır (`kebab-case`), yalnızca ASCII. Etiketler Türkçe ve İngilizce verilir.
+        Codes are lowercase with hyphens (`kebab-case`), ASCII only. Labels are given in Turkish and English.
+  - type: dropdown
+    id: vocabulary
+    attributes:
+      label: "Sözlük / Vocabulary"
+      options:
+        - regions
+        - event-types
+        - characterizations
+        - actor-kinds
+        - site-types
+        - equipment-categories
+        - source-types
+        - countries
+    validations:
+      required: true
+  - type: dropdown
+    id: change
+    attributes:
+      label: "Değişiklik türü / Type of change"
+      options:
+        - "Yeni kod / New code"
+        - "Mevcut kodun etiketi veya tanımı / Label or definition of an existing code"
+        - "Kodun kullanımdan kaldırılması / Deprecate a code"
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: "Önerilen kod / Proposed code"
+      placeholder: "naval-exercise"
+    validations:
+      required: true
+  - type: input
+    id: label_tr
+    attributes:
+      label: "Türkçe etiket / Turkish label"
+    validations:
+      required: true
+  - type: input
+    id: label_en
+    attributes:
+      label: "İngilizce etiket / English label"
+    validations:
+      required: true
+  - type: textarea
+    id: definition
+    attributes:
+      label: "Tanım / Definition"
+      description: "Ne zaman kullanılır, ne zaman kullanılmaz; mevcut kodlardan farkı. / When to use it, when not to, and how it differs from existing codes."
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: "Neden gerekli? / Why is it needed?"
+      description: "Mevcut sözlükle karşılanamayan örnekler (kayıt kimlikleri veya bağlantılar). / Examples the current vocabulary cannot cover (record IDs or links)."
+    validations:
+      required: true

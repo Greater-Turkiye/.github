@@ -1,0 +1,122 @@
+name: "Veri önerisi / Data submission"
+description: "Açık kaynaklarda raporlanmış bir olayı kayıt adayı olarak önerin. / Propose a publicly reported event as a candidate record."
+title: "[Veri / Data] "
+labels: ["data-submission", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Göndermeden önce / Before submitting**
+
+        - [Kırmızı çizgiler](https://github.com/Greater-Turkiye/handbook/blob/main/tr/02-red-lines.md) · [Red lines](https://github.com/Greater-Turkiye/handbook/blob/main/en/02-red-lines.md)
+        - Bu form **herkese açıktır**. Kişisel veri, sızıntı veya Türk kuvvetlerine ait bilgi içeren bir durumu burada değil, [özel kanaldan](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md) bildirin.
+        - This form is **public**. Report anything involving personal data, leaks or Turkish forces information through the [private channel](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md), not here.
+        - İddiaları kaynağa atfedin ("X'e göre ..."). / Attribute claims ("According to X, ...").
+  - type: textarea
+    id: what_tr
+    attributes:
+      label: "Ne oldu? (Türkçe) / What happened? (Turkish)"
+      description: "Kısa, tarafsız ve kaynağa atfedilmiş bir özet. Kaynağın metnini kopyalamayın. / A short, neutral, attributed summary. Do not copy the source text."
+      placeholder: "<Kurum>, <tarih> tarihinde <bölge> içinde <olay> gerçekleştiğini açıkladı."
+    validations:
+      required: true
+  - type: textarea
+    id: what_en
+    attributes:
+      label: "Ne oldu? (İngilizce, isteğe bağlı) / What happened? (English, optional)"
+      placeholder: "<Institution> announced that <event> took place in <region> on <date>."
+    validations:
+      required: false
+  - type: input
+    id: when_utc
+    attributes:
+      label: "Ne zaman? (UTC) / When? (UTC)"
+      description: "ISO 8601, UTC. Yalnızca gün biliniyorsa yalnızca tarih yazın. / ISO 8601, UTC. If only the day is known, give the date only."
+      placeholder: "2026-09-12T14:30Z  |  2026-09-12"
+    validations:
+      required: true
+  - type: dropdown
+    id: region
+    attributes:
+      label: "Bölge / Region"
+      description: "Olayın gerçekleştiği bölge kodu. / Region code where the event took place."
+      options:
+        - syria
+        - iraq
+        - iran
+        - levant
+        - caucasus
+        - aegean
+        - east-med
+        - cyprus
+        - black-sea
+        - libya-north-africa
+        - gulf-red-sea
+        - balkans
+        - central-asia
+        - global
+    validations:
+      required: true
+  - type: input
+    id: place
+    attributes:
+      label: "Yer (isteğe bağlı) / Place (optional)"
+      description: "Kaynakta geçen yer adı veya idari birim. Türkiye içindeki konumları yazmayın. / Place name or administrative area as stated by the source. Do not give locations inside Türkiye."
+    validations:
+      required: false
+  - type: input
+    id: event_type
+    attributes:
+      label: "Olay türü / Event type"
+      description: "Serbest metin; triyajcılar sözlükteki koda eşler. / Free text; triagers will map it to a vocabulary code."
+      placeholder: "tatbikat / exercise, tedarik / procurement, konuşlanma / deployment, olay / incident ..."
+    validations:
+      required: false
+  - type: textarea
+    id: source_urls
+    attributes:
+      label: "Kaynak bağlantıları / Source URLs"
+      description: "Her satıra bir bağlantı. Mümkünse birincil kaynak (resmî açıklama vb.). / One URL per line. Primary sources (official statements etc.) preferred."
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: archive_urls
+    attributes:
+      label: "Arşiv bağlantıları / Archive URLs"
+      description: "web.archive.org veya archive.today bağlantıları, kaynaklarla aynı sırada. Yoksa nedenini yazın. / web.archive.org or archive.today links, in the same order as the sources. If missing, say why."
+      render: text
+    validations:
+      required: false
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: "Güven düzeyiniz / Your confidence"
+      options:
+        - "Düşük — tek kaynak veya doğrulanmamış / Low — single or unverified source"
+        - "Orta — birden fazla bağımsız kaynak / Medium — several independent sources"
+        - "Yüksek — resmî açıklama veya görsel doğrulama / High — official statement or visual verification"
+        - "Emin değilim / Not sure"
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: "Notlar / Notes"
+      description: "Çelişen iddialar, bağlam, doğrulama adımları. / Conflicting claims, context, verification steps."
+    validations:
+      required: false
+  - type: checkboxes
+    id: red_lines
+    attributes:
+      label: "Kırmızı çizgiler / Red lines"
+      description: "Tüm kutular zorunludur. / All boxes are required."
+      options:
+        - label: "Yalnızca herkese açık kaynaklar kullandım. / I used public sources only."
+          required: true
+        - label: "Türk kuvvetlerinin konum veya hareketlerine dair bilgi içermiyor. / It contains no positions or movements of Turkish forces."
+          required: true
+        - label: "Kişisel veri içermiyor. / It contains no personal data."
+          required: true
+        - label: "Gizli veya sızdırılmış materyal içermiyor. / It contains no classified or leaked material."
+          required: true

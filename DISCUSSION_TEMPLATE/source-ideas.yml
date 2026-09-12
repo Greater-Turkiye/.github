@@ -1,0 +1,36 @@
+title: "[Kaynak fikri / Source idea] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Henüz resmî önerisi hazır olmayan kaynak fikirleri. Olgunlaşan fikirler datasets deposunda "Kaynak önerisi" formuyla açılır.
+        Source ideas that are not yet a formal suggestion. Mature ideas are filed with the "Source suggestion" form in the datasets repository.
+
+        Yalnızca herkese açık kaynaklar; özel kişilerin hesaplarını veya sızıntı sitelerini paylaşmayın. / Public sources only; do not share private individuals' accounts or leak sites.
+  - type: input
+    id: source
+    attributes:
+      label: "Kaynak (ad veya bağlantı) / Source (name or URL)"
+    validations:
+      required: true
+  - type: input
+    id: regions
+    attributes:
+      label: "İlgili bölgeler / Relevant regions"
+      placeholder: "caucasus, black-sea ..."
+    validations:
+      required: false
+  - type: textarea
+    id: value
+    attributes:
+      label: "Ne katar? / What does it add?"
+      description: "Kapsama, dil, hız, birincil erişim; bilinen yanlılık veya riskler. / Coverage, language, timeliness, primary access; known biases or risks."
+    validations:
+      required: true
+  - type: checkboxes
+    id: public
+    attributes:
+      label: "Onay / Confirmation"
+      options:
+        - label: "Kaynak herkese açık ve özel bir kişiyi izlemiyor. / The source is public and does not track a private individual."
+          required: true

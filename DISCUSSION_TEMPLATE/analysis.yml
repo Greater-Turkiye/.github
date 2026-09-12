@@ -1,0 +1,34 @@
+title: "[Analiz / Analysis] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Kayıtlarımıza dayanan analiz ve eğilim tartışmaları. Kesin ifadeler yerine kaynaklı ve ölçülü bir dil kullanın; olasılık ifadeleri için el kitabındaki stil rehberine uyun.
+        Analysis and trend discussions based on our records. Use sourced, measured language instead of certainties; follow the handbook style guide for probability wording.
+
+        Kırmızı çizgiler burada da geçerlidir: Türk kuvvetlerine ait konum/hareket yok, hedef gösteren dil yok. / Red lines apply here too: no Turkish forces positions/movements, no targeting language.
+  - type: input
+    id: topic
+    attributes:
+      label: "Konu / Topic"
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: "Özet ve temel bulgular / Summary and key findings"
+    validations:
+      required: true
+  - type: textarea
+    id: records
+    attributes:
+      label: "Dayanak kayıtlar ve kaynaklar / Supporting records and sources"
+      description: "Kayıt kimlikleri (evt_..., act_..., sit_...) ve bağlantılar. / Record IDs (evt_..., act_..., sit_...) and links."
+    validations:
+      required: true
+  - type: textarea
+    id: uncertainty
+    attributes:
+      label: "Belirsizlikler ve alternatif açıklamalar / Uncertainties and alternative explanations"
+    validations:
+      required: false

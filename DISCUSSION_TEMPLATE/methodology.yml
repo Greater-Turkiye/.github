@@ -1,0 +1,36 @@
+title: "[Yöntem / Methodology] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Doğrulama, kaynak değerlendirme, arşivleme, coğrafi konumlandırma veya veri modeli üzerine tartışmalar.
+        Discussions on verification, source evaluation, archiving, geolocation or the data model.
+
+        Kural değişikliği gerektiren sonuçlar el kitabında bir ADR'ye dönüştürülür. / Outcomes that require a rule change become an ADR in the handbook.
+  - type: dropdown
+    id: area
+    attributes:
+      label: "Alan / Area"
+      options:
+        - "Doğrulama / Verification"
+        - "Kaynak ve arşivleme / Sourcing and archiving"
+        - "Coğrafya, zaman, tartışmalı bölgeler / Geography, time, disputed areas"
+        - "Veri modeli ve sözlükler / Data model and vocabularies"
+        - "Stil ve dil / Style and language"
+        - "OPSEC"
+        - "Diğer / Other"
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: "Soru veya öneri / Question or proposal"
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: "Bağlam ve örnekler / Context and examples"
+      description: "İlgili el kitabı sayfaları, kayıt kimlikleri, bağlantılar. / Relevant handbook pages, record IDs, links."
+    validations:
+      required: false

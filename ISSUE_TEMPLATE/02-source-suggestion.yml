@@ -1,0 +1,77 @@
+name: "Kaynak önerisi / Source suggestion"
+description: "İzlenmesi gereken yeni bir açık kaynak önerin. / Suggest a new public source to follow."
+title: "[Kaynak / Source] "
+labels: ["source-suggestion", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Yalnızca herkese açık kaynaklar. Özel kişilerin hesaplarını, kapalı grupları veya sızıntı sitelerini önermeyin.
+        Public sources only. Do not suggest private individuals' accounts, closed groups or leak sites.
+  - type: input
+    id: name
+    attributes:
+      label: "Kaynağın adı / Source name"
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: "Bağlantı / URL"
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: "Kaynak türü / Source type"
+      options:
+        - "Resmî / hükümet / Official / government"
+        - "Haber medyası / News media"
+        - "Düşünce kuruluşu / araştırma / Think tank / research"
+        - "OSINT araştırmacısı veya kolektifi / OSINT researcher or collective"
+        - "Sosyal medya kanalı (kurumsal/kamusal) / Social media channel (institutional/public)"
+        - "Veri akışı / API / Data feed / API"
+        - "Uydu görüntüsü / Satellite imagery"
+        - "Diğer / Other"
+    validations:
+      required: true
+  - type: input
+    id: languages
+    attributes:
+      label: "Diller / Languages"
+      placeholder: "ar, el, en, fa, ru ..."
+    validations:
+      required: true
+  - type: textarea
+    id: why_reliable
+    attributes:
+      label: "Neden güvenilir? / Why is it reliable?"
+      description: "Geçmiş isabet, birincil erişim, yöntem şeffaflığı, bilinen yanlılıklar. / Track record, primary access, methodological transparency, known biases."
+    validations:
+      required: true
+  - type: dropdown
+    id: reuse_terms
+    attributes:
+      label: "Yeniden kullanım koşulları biliniyor mu? / Are reuse terms known?"
+      options:
+        - "Evet, açık lisans / Yes, open licence"
+        - "Evet, kısıtlayıcı koşullar / Yes, restrictive terms"
+        - "Bilinmiyor / Unknown"
+    validations:
+      required: true
+  - type: input
+    id: terms_url
+    attributes:
+      label: "Koşullar / lisans bağlantısı (varsa) / Terms or licence URL (if any)"
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: "Onay / Confirmation"
+      options:
+        - label: "Kaynak herkese açık; erişim için giriş, ödeme duvarını aşma veya sızıntı gerekmiyor. / The source is public; no login bypass, paywall circumvention or leaks are required."
+          required: true
+        - label: "Kaynak özel bir kişiyi izlemiyor ve kişisel veri yayımlamıyor. / The source does not track a private individual or publish personal data."
+          required: true

@@ -1,0 +1,71 @@
+name: "Hata / özellik / Bug or feature"
+description: "Araçlar (tools/gt.py) veya platform için hata bildirimi ya da özellik isteği. / Bug report or feature request for tools (tools/gt.py) or the platform."
+title: "[Hata-Özellik / Bug-Feature] "
+labels: ["triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Güvenlik açıklarını burada **değil**, [özel kanaldan](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md) bildirin.
+        Report security vulnerabilities through the [private channel](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md), **not** here.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: "Tür / Kind"
+      options:
+        - "Hata / Bug"
+        - "Özellik isteği / Feature request"
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: "Bileşen / Component"
+      options:
+        - "datasets: tools/gt.py"
+        - "datasets: schemas / vocab"
+        - "platform: collectors"
+        - "platform: publishers"
+        - "platform: apps (api, review-bot, scheduler, web)"
+        - "platform: db"
+        - "CI / GitHub Actions"
+        - "Diğer / Other"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: "Açıklama / Description"
+      description: "Hata için: ne oldu? Özellik için: hangi sorunu çözüyor? / For a bug: what happened? For a feature: what problem does it solve?"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Yeniden üretme adımları / Steps to reproduce"
+      placeholder: |
+        1. python tools/gt.py validate
+        2. ...
+    validations:
+      required: false
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Beklenen davranış / Expected behaviour"
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: "Çıktı / günlük / Output or logs"
+      description: "Token, yol veya kullanıcı adı gibi kişisel bilgileri silin. / Remove tokens, paths or usernames that identify you."
+      render: text
+    validations:
+      required: false
+  - type: input
+    id: environment
+    attributes:
+      label: "Ortam / Environment"
+      placeholder: "OS, Python sürümü / version, commit SHA"
+    validations:
+      required: false
