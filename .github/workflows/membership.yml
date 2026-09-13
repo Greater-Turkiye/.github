@@ -1,0 +1,133 @@
+# Membership requests: an issue opened with ISSUE_TEMPLATE/06-membership.yml becomes an org invitation
+# into the read-only "katilimcilar" team.
+#   vars.GT_JOIN_MODE = approval (default): a maintainer (repo admin) adds the "onay" label to send the invite
+#                     = auto: requests that pass the checks are invited right away
+#   vars.GT_APP_CLIENT_ID + secrets.GT_APP_PRIVATE_KEY: the org's GitHub App (Organization › Members: write),
+#   because GITHUB_TOKEN cannot invite org members.
+# Issue text is untrusted: it is only read inside github-script, never interpolated into a shell.
+name: Üyelik başvurusu / Membership request
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: membership-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  membership:
+    if: contains(github.event.issue.labels.*.name, 'uyelik-basvurusu') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check the request
+        id: check
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          JOIN_MODE: ${{ vars.GT_JOIN_MODE }}
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const out = (decision, reason = '') => {
+              core.setOutput('decision', decision);
+              core.setOutput('reason', reason);
+              core.setOutput('login', issue.user.login);
+              core.info(`decision=${decision} reason=${reason}`);
+            };
+            if (issue.user.type !== 'User') return out('skip', 'not a user account');
+            if (context.payload.action === 'labeled') {
+              if (context.payload.label.name !== 'onay') return out('skip', 'other label');
+              // only maintainers (admin on this repository) can approve a membership
+              const sender = context.payload.sender.login;
+              const { data } = await github.rest.repos.getCollaboratorPermissionLevel({ ...context.repo, username: sender });
+              return data.permission === 'admin' ? out('invite', 'approved by ' + sender) : out('unauthorised', sender);
+            }
+            // opened: the form's three required boxes must be ticked (issues opened through the API skip the form)
+            const ticked = ((issue.body || '').match(/^- \[x\] /gim) || []).length;
+            if (ticked < 3) return out('reject', 'terms');
+            const { data: user } = await github.rest.users.getByUsername({ username: issue.user.login });
+            if ((Date.now() - Date.parse(user.created_at)) / 864e5 < 30) return out('reject', 'age');
+            return out((process.env.JOIN_MODE || 'approval').toLowerCase() === 'auto' ? 'invite' : 'wait');
+
+      - name: Get a GitHub App token (members)
+        id: app
+        if: steps.check.outputs.decision == 'invite'
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        with:
+          client-id: ${{ vars.GT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.GT_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          permission-members: write
+
+      - name: Invite into the katilimcilar team
+        id: invite
+        if: steps.check.outputs.decision == 'invite'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          LOGIN: ${{ steps.check.outputs.login }}
+        with:
+          github-token: ${{ steps.app.outputs.token }}
+          script: |
+            const org = context.repo.owner, username = process.env.LOGIN;
+            try {
+              await github.rest.orgs.checkMembershipForUser({ org, username });
+              return core.setOutput('result', 'member');
+            } catch (e) { if (e.status !== 404 && e.status !== 302) throw e; }
+            const { data: user } = await github.rest.users.getByUsername({ username });
+            const { data: team } = await github.rest.teams.getByName({ org, team_slug: 'katilimcilar' });
+            try {
+              await github.rest.orgs.createInvitation({ org, invitee_id: user.id, role: 'direct_member', team_ids: [team.id] });
+              core.setOutput('result', 'invited');
+            } catch (e) {
+              if (e.status !== 422) throw e;
+              core.setOutput('result', 'pending'); // an invitation is already waiting
+            }
+
+      - name: Reply on the issue
+        if: always() && steps.check.outputs.decision != '' && steps.check.outputs.decision != 'skip'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          DECISION: ${{ steps.check.outputs.decision }}
+          REASON: ${{ steps.check.outputs.reason }}
+          RESULT: ${{ steps.invite.outputs.result }}
+          INVITE_OUTCOME: ${{ steps.invite.outcome }}
+        with:
+          script: |
+            const { DECISION, REASON, RESULT, INVITE_OUTCOME } = process.env;
+            const n = context.payload.issue.number, who = '@' + context.payload.issue.user.login;
+            const redLines = 'https://github.com/Greater-Turkiye/handbook/blob/main/tr/02-red-lines.md';
+            const say = (body) => github.rest.issues.createComment({ ...context.repo, issue_number: n, body });
+            const close = (state_reason) => github.rest.issues.update({ ...context.repo, issue_number: n, state: 'closed', state_reason });
+            const unlabel = (name) => github.rest.issues.removeLabel({ ...context.repo, issue_number: n, name }).catch(() => {});
+            if (DECISION === 'wait') {
+              await github.rest.issues.addLabels({ ...context.repo, issue_number: n, labels: ['onay-bekliyor'] });
+              return say(`${who} başvurun alındı, teşekkürler. Bir bakımcı onayladığında organizasyon daveti otomatik gönderilecek.\n\n` +
+                `Your request has been received, thank you. The organisation invitation is sent automatically once a maintainer approves it.`);
+            }
+            if (DECISION === 'reject') {
+              const why = REASON === 'age'
+                ? 'GitHub hesabın 30 günden yeni. Hesabın 30 günlük olunca yeniden başvurabilirsin. / Your GitHub account is less than 30 days old. You can apply again once it is 30 days old.'
+                : `Başvuru formundaki üç kabul kutusu işaretlenmemiş. Lütfen formu kullanarak yeniden başvur. / The three agreement boxes of the form are not ticked. Please apply again using the form. ([Kırmızı çizgiler / Red lines](${redLines}))`;
+              await say(`${who} ${why}`);
+              return close('not_planned');
+            }
+            if (DECISION === 'unauthorised') {
+              await unlabel('onay');
+              return say(`@${REASON} üyelik başvurularını yalnızca bakımcılar onaylayabilir. / Only maintainers can approve membership requests.`);
+            }
+            if (INVITE_OUTCOME !== 'success') {
+              return say('Davet gönderilemedi; bakımcılar iş akışı kaydına bakacak. / The invitation could not be sent; maintainers will check the workflow run.');
+            }
+            await unlabel('onay-bekliyor');
+            const text = {
+              invited: `${who} organizasyon davetin gönderildi. GitHub bildirimlerinden veya e-postandan kabul edebilirsin: https://github.com/orgs/${context.repo.owner}/invitation\n\nYour organisation invitation has been sent. Accept it from your GitHub notifications or email.`,
+              pending: `${who} zaten bekleyen bir davetin var: https://github.com/orgs/${context.repo.owner}/invitation\n\nYou already have a pending invitation.`,
+              member: `${who} zaten organizasyon üyesisin. / You are already a member of the organisation.`,
+            }[RESULT] || 'Tamam. / Done.';
+            await say(text);
+            return close('completed');
