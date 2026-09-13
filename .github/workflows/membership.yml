@@ -30,9 +30,12 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           JOIN_MODE: ${{ vars.GT_JOIN_MODE }}
+          APP_READY: ${{ vars.GT_APP_CLIENT_ID != '' && secrets.GT_APP_PRIVATE_KEY != '' }}
         with:
           script: |
             const issue = context.payload.issue;
+            // until the GitHub App is installed and its key stored, approved requests are invited by hand
+            core.setOutput('app', process.env.APP_READY === 'true' ? 'yes' : 'no');
             const out = (decision, reason = '') => {
               core.setOutput('decision', decision);
               core.setOutput('reason', reason);
@@ -56,7 +59,7 @@ jobs:
 
       - name: Get a GitHub App token (members)
         id: app
-        if: steps.check.outputs.decision == 'invite'
+        if: steps.check.outputs.decision == 'invite' && steps.check.outputs.app == 'yes'
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
         with:
           client-id: ${{ vars.GT_APP_CLIENT_ID }}
@@ -66,7 +69,7 @@ jobs:
 
       - name: Invite into the katilimcilar team
         id: invite
-        if: steps.check.outputs.decision == 'invite'
+        if: steps.check.outputs.decision == 'invite' && steps.check.outputs.app == 'yes'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           LOGIN: ${{ steps.check.outputs.login }}
@@ -96,9 +99,10 @@ jobs:
           REASON: ${{ steps.check.outputs.reason }}
           RESULT: ${{ steps.invite.outputs.result }}
           INVITE_OUTCOME: ${{ steps.invite.outcome }}
+          APP: ${{ steps.check.outputs.app }}
         with:
           script: |
-            const { DECISION, REASON, RESULT, INVITE_OUTCOME } = process.env;
+            const { DECISION, REASON, RESULT, INVITE_OUTCOME, APP } = process.env;
             const n = context.payload.issue.number, who = '@' + context.payload.issue.user.login;
             const redLines = 'https://github.com/Greater-Turkiye/handbook/blob/main/tr/02-red-lines.md';
             const say = (body) => github.rest.issues.createComment({ ...context.repo, issue_number: n, body });
@@ -119,6 +123,12 @@ jobs:
             if (DECISION === 'unauthorised') {
               await unlabel('onay');
               return say(`@${REASON} üyelik başvurularını yalnızca bakımcılar onaylayabilir. / Only maintainers can approve membership requests.`);
+            }
+            if (APP !== 'yes') { // no GitHub App yet: a maintainer sends the invitation by hand
+              await unlabel('onay-bekliyor');
+              await github.rest.issues.addLabels({ ...context.repo, issue_number: n, labels: ['davet-gonderilecek'] });
+              return say(`${who} başvurun onaylandı. Organizasyon davetin kısa süre içinde bir bakımcı tarafından gönderilecek.\n\n` +
+                `Your request has been approved. A maintainer will send your organisation invitation shortly.`);
             }
             if (INVITE_OUTCOME !== 'success') {
               return say('Davet gönderilemedi; bakımcılar iş akışı kaydına bakacak. / The invitation could not be sent; maintainers will check the workflow run.');
