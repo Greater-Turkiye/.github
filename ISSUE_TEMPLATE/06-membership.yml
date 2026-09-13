@@ -1,0 +1,53 @@
+name: "Üyelik başvurusu / Membership request"
+description: "Greater-Turkiye organizasyonuna katılım başvurusu. / Apply to join the Greater-Turkiye organisation."
+title: "[Üyelik / Membership] "
+labels: ["uyelik-basvurusu"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Üyelik ne sağlar? / What membership gives you**
+
+        - Başvurun onaylanınca GitHub hesabına bir organizasyon daveti gelir. Daveti kabul edince **katılımcılar** takımına girersin.
+        - Üyelik yazma yetkisi vermez. Veri ve kod katkıları herkeste olduğu gibi PR ile gelir ve incelemeden geçer.
+        - Once approved, your GitHub account receives an organisation invitation. Accept it to join the **katilimcilar** (participants) team.
+        - Membership grants no write access. Data and code contributions still come as reviewed pull requests, like anyone else's.
+
+        **Bu form herkese açıktır. / This form is public.**
+
+        - Gerçek adını, iş yerini, konumunu veya başka kişisel bilgini yazma. Takma adla katılabilirsin.
+        - Do not write your real name, employer, location or any other personal data. Pseudonyms are welcome.
+        - [Kırmızı çizgiler](https://github.com/Greater-Turkiye/handbook/blob/main/tr/02-red-lines.md) · [Red lines](https://github.com/Greater-Turkiye/handbook/blob/main/en/02-red-lines.md)
+  - type: dropdown
+    id: interest
+    attributes:
+      label: "Nasıl katkı vermek istersin? / How would you like to contribute?"
+      multiple: true
+      options:
+        - "Veri girişi ve doğrulama / Data entry and verification"
+        - "Kaynak takibi / Source monitoring"
+        - "Çeviri (TR ↔ EN) / Translation (TR ↔ EN)"
+        - "Harita ve CBS / Maps and GIS"
+        - "Yazılım ve otomasyon / Software and automation"
+        - "Analiz ve yazım / Analysis and writing"
+    validations:
+      required: true
+  - type: textarea
+    id: about
+    attributes:
+      label: "Kısaca kendinden bahset (isteğe bağlı) / A few words about you (optional)"
+      description: "İlgi alanların, bildiğin diller, daha önce yaptığın açık kaynak çalışmaları. Kişisel bilgi yazma. / Interests, languages, previous open-source work. No personal data."
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: "Kabul / Agreement"
+      description: "Tüm kutular zorunludur. / All boxes are required."
+      options:
+        - label: "Kırmızı çizgileri okudum ve kabul ediyorum. / I have read and accept the red lines."
+          required: true
+        - label: "Davranış kurallarını kabul ediyorum. / I accept the Code of Conduct."
+          required: true
+        - label: "Başvurumun ve kullanıcı adımın herkese açık olduğunu biliyorum. / I understand that this request and my username are public."
+          required: true
