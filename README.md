@@ -27,23 +27,23 @@ Notlar:
 
 ## English
 
-This repository holds the Greater Türkiye organization's **profile page** and **default community health files**. When a repository in the organization does not contain its own version of one of these files, GitHub uses the one from here.
+This repository holds the Greater Türkiye organisation's **profile page** and **default community health files**. GitHub falls back to these files for any repository in the organisation that does not have its own version.
 
 | File / folder | Purpose |
 |---|---|
-| `profile/README.md` | Landing page shown at github.com/Greater-Turkiye |
-| `CODE_OF_CONDUCT.md` | Code of conduct, red lines addendum and enforcement ladder |
-| `CONTRIBUTING.md` | Organization-wide contribution guide |
-| `GOVERNANCE.md` | Roles, promotion path, decision making, review rules |
-| `SECURITY.md` | Private channel for vulnerabilities, sensitive content and takedown requests |
-| `SUPPORT.md` | Where to ask what |
+| `profile/README.md` | Landing page at github.com/Greater-Turkiye |
+| `CODE_OF_CONDUCT.md` | Code of conduct, with the red lines annex and enforcement ladder |
+| `CONTRIBUTING.md` | Contribution guide for the whole organisation |
+| `GOVERNANCE.md` | Roles, promotion path, decision-making and review rules |
+| `SECURITY.md` | Private channel for reporting vulnerabilities, sensitive content and takedown requests |
+| `SUPPORT.md` | Where to ask which question |
 | `ISSUE_TEMPLATE/` | Default issue forms |
 | `PULL_REQUEST_TEMPLATE.md` | Default PR checklist |
 | `DISCUSSION_TEMPLATE/` | Discussion category forms |
-| `LICENSE` | MIT licence for the files in this repository |
+| `LICENSE` | MIT licence covering the files in this repository |
 
 Notes:
 
-- If a repository has its own `.github/ISSUE_TEMPLATE/` folder, the issue forms here are **not used at all** in that repository; GitHub does not merge the folders file by file.
-- There is deliberately **no** issue form for takedown requests or sensitive content; those go only through the private channel described in [SECURITY.md](SECURITY.md).
-- Changing a file here affects every repository in the organization, so changes require approval from a maintainer.
+- If a repository has its own `.github/ISSUE_TEMPLATE/` folder, **none** of the issue forms here are used in that repository; GitHub does not merge the two folders file by file.
+- There is **no** issue form for takedown requests or reports of sensitive content; these go only through the private channel described in [SECURITY.md](SECURITY.md).
+- Changes here affect every repository in the organisation, so they require a maintainer's approval.
