@@ -5,6 +5,8 @@
 
 [Türkçe](#türkçe) · [English](#english)
 
+**Harita ve OSINT paneli yayında / The map and OSINT dashboard are live:** <https://greater-turkiye.github.io/platform/>
+
 ---
 
 ## Türkçe
@@ -37,15 +39,16 @@ Ayrıntılar: [Kırmızı çizgiler](https://github.com/Greater-Turkiye/handbook
 |---|---|
 | [handbook](https://github.com/Greater-Turkiye/handbook) | Misyon, kırmızı çizgiler, hukuk ve etik, OPSEC, doğrulama, stil rehberi, sözlük ve karar kayıtları (ADR) |
 | [datasets](https://github.com/Greater-Turkiye/datasets) | Doğrulanmış kayıtlar (olay, aktör, tesis, teçhizat, kaynak), JSON şemaları, sözlükler ve doğrulama aracı |
-| [platform](https://github.com/Greater-Turkiye/platform) | Toplama, inceleme ve yayın altyapısı (tasarım aşamasında) |
+| [platform](https://github.com/Greater-Turkiye/platform) | [Yayındaki harita ve panel](https://greater-turkiye.github.io/platform/), harita veri üreticileri, toplayıcılar ve yayın altyapısı |
 | [.github](https://github.com/Greater-Turkiye/.github) | Bu sayfa ve varsayılan topluluk dosyaları |
 
 ### Nasıl katılırım?
 
 1. [El kitabını](https://github.com/Greater-Turkiye/handbook) okuyun; önce kırmızı çizgiler ve OPSEC sayfaları.
-2. [Yeni başlayanlara uygun işlere](https://github.com/search?q=org%3AGreater-Turkiye+label%3A%22good+first+issue%22+state%3Aopen&type=issues) göz atın.
-3. Bir olay veya kaynak önermek için [issue formlarını](https://github.com/Greater-Turkiye/datasets/issues/new/choose) kullanın.
-4. Soru ve fikirleriniz için [Tartışmalar](https://github.com/orgs/Greater-Turkiye/discussions) bölümüne yazın.
+2. Topluluğa katılmak için [üyelik başvurusu](https://github.com/Greater-Turkiye/.github/issues/new?template=06-membership.yml) açın; onaylanınca organizasyon daveti gelir.
+3. [Yeni başlayanlara uygun işlere](https://github.com/search?q=org%3AGreater-Turkiye+label%3A%22good+first+issue%22+state%3Aopen&type=issues) göz atın.
+4. Bir olay veya kaynak önermek için [issue formlarını](https://github.com/Greater-Turkiye/datasets/issues/new/choose) kullanın.
+5. Soru ve fikirleriniz için [Tartışmalar](https://github.com/orgs/Greater-Turkiye/discussions) bölümüne yazın.
 
 Takma adla katkı memnuniyetle karşılanır. Hassas bir durum mu var? Herkese açık issue açmayın; [güvenlik politikasına](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md) bakın.
 
@@ -92,15 +95,16 @@ Details: [Red lines](https://github.com/Greater-Turkiye/handbook/blob/main/en/02
 |---|---|
 | [handbook](https://github.com/Greater-Turkiye/handbook) | Mission, red lines, law and ethics, OPSEC, verification, style guide, glossary and decision records (ADRs) |
 | [datasets](https://github.com/Greater-Turkiye/datasets) | Verified records (events, actors, sites, equipment, sources), JSON Schemas, vocabularies and the validator |
-| [platform](https://github.com/Greater-Turkiye/platform) | Collection, review and publishing infrastructure (in the design phase) |
+| [platform](https://github.com/Greater-Turkiye/platform) | The [live map and dashboard](https://greater-turkiye.github.io/platform/), the map data builders, the collectors and the publishing infrastructure |
 | [.github](https://github.com/Greater-Turkiye/.github) | This page and the default community files |
 
 ### How to join
 
 1. Read the [handbook](https://github.com/Greater-Turkiye/handbook), starting with the red lines and OPSEC pages.
-2. Browse [good first issues](https://github.com/search?q=org%3AGreater-Turkiye+label%3A%22good+first+issue%22+state%3Aopen&type=issues).
-3. Use the [issue forms](https://github.com/Greater-Turkiye/datasets/issues/new/choose) to suggest an event or source.
-4. Post questions and ideas in [Discussions](https://github.com/orgs/Greater-Turkiye/discussions).
+2. To join the community, open a [membership request](https://github.com/Greater-Turkiye/.github/issues/new?template=06-membership.yml); once it is approved you receive an organisation invitation.
+3. Browse [good first issues](https://github.com/search?q=org%3AGreater-Turkiye+label%3A%22good+first+issue%22+state%3Aopen&type=issues).
+4. Use the [issue forms](https://github.com/Greater-Turkiye/datasets/issues/new/choose) to suggest an event or source.
+5. Post questions and ideas in [Discussions](https://github.com/orgs/Greater-Turkiye/discussions).
 
 Contributions under a pseudonym are welcome. Dealing with something sensitive? Do not open a public issue; follow the [security policy](https://github.com/Greater-Turkiye/.github/blob/main/SECURITY.md).
 
