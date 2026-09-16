@@ -47,3 +47,8 @@ Notes:
 - If a repository has its own `.github/ISSUE_TEMPLATE/` folder, **none** of the issue forms here are used in that repository; GitHub does not merge the two folders file by file.
 - There is **no** issue form for takedown requests or reports of sensitive content; these go only through the private channel described in [SECURITY.md](SECURITY.md).
 - Changes here affect every repository in the organisation, so they require a maintainer's approval.
+
+## Depo kurallari / Repository rules
+
+Yapay zeka araclari ve yeni katkicilar icin kisa calisma kurallari: [CLAUDE.md](CLAUDE.md). Bu kurallarin ilki, her degisiklikte README dosyasini ayni PR icinde guncel tutmaktir.
+Short working rules for AI agents and new contributors: [CLAUDE.md](CLAUDE.md). The first of them is keeping the README true in the same pull request as the change.
