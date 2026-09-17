@@ -29,6 +29,12 @@ This repository holds the organisation profile, the community health files that 
 - Commit messages and PR bodies are in English and end with the attribution lines used across this org.
 - Never commit secrets, tokens or private keys; credentials are added to GitHub secrets by a human.
 
-## 5. Environment notes
+## 5. Closing a task
+
+- End every finished task with a short, factual summary: what changed, what you verified, what is merged, and what is still open.
+- Then offer the next steps as a numbered list (1, 2, 3), each one sentence, with your recommendation marked, so the owner can choose by number.
+- Name anything the owner must do themselves as its own option rather than burying it in prose.
+
+## 6. Environment notes
 
 - Windows PowerShell 5.1 is the default shell here: pass multi-line commit messages and PR bodies through files, and avoid `jq` expressions containing spaces.
