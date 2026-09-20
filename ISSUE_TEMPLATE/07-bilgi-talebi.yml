@@ -1,0 +1,90 @@
+name: "Bilgi talebi (RFI) / Request for information"
+description: "Sisteme bir soru sorun: cevabı açık kaynaklardan aranacak bir bilgi ihtiyacı. / Ask the project a question: an information need to be answered from open sources."
+title: "[Soru / RFI] "
+labels: ["bilgi-talebi", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bu proje bugüne kadar yalnızca **akanı** topladı. Bir bilgi talebi, akışı tersine çevirir:
+        önce soru, sonra toplama. Sorunuz bir toplama görevine dönüşür ve cevabı — bulunursa —
+        kaynağıyla birlikte bir kayda bağlanır.
+
+        **Neyi soramazsınız:** Türk kuvvetlerinin konumu, hareketi veya tertibatı; kişiler hakkında
+        bilgi; bir tesisin zafiyeti, yaklaşma güzergâhı veya isabet noktası; kapalı/sızdırılmış
+        belge; sahada gözlem gerektiren herhangi bir şey. Bunlar
+        [kırmızı çizgilerdir](https://github.com/Greater-Turkiye/handbook/blob/main/tr/02-red-lines.md)
+        ve talep kapatılır.
+
+        This project has so far collected only what flows past it. A request for information turns
+        that around: the question first, the collection after. Anything about Turkish forces,
+        individuals, a facility's vulnerabilities, classified or leaked material, or anything
+        needing observation in the field is a red line and the request is closed.
+  - type: textarea
+    id: question
+    attributes:
+      label: "Soru / The question"
+      description: "Tek cümlede, cevaplanabilir biçimde. 'Ege'de neler oluyor' değil; 'X adasındaki Y tesisinin kuruluş tarihi hangi resmî belgede geçiyor' gibi. / One answerable sentence."
+      placeholder: "…"
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: "Neden önemli / Why it matters"
+      description: "Cevap ne işe yarayacak, hangi kararı veya hangi kaydı besleyecek? / What the answer feeds: which decision, which record."
+    validations:
+      required: true
+  - type: dropdown
+    id: region
+    attributes:
+      label: "Bölge / Region"
+      options:
+        - "Ege / Aegean"
+        - "Doğu Akdeniz / Eastern Mediterranean"
+        - "Kıbrıs / Cyprus"
+        - "Karadeniz / Black Sea"
+        - "Suriye / Syria"
+        - "Irak / Iraq"
+        - "İran / Iran"
+        - "Levant / Levant"
+        - "Kafkasya / Caucasus"
+        - "Balkanlar / Balkans"
+        - "Libya ve Kuzey Afrika / Libya and North Africa"
+        - "Körfez ve Kızıldeniz / Gulf and Red Sea"
+        - "Orta Asya / Central Asia"
+        - "Bölgeye bağlı değil / Not tied to a region"
+    validations:
+      required: true
+  - type: dropdown
+    id: horizon
+    attributes:
+      label: "Ne zamana kadar / By when"
+      description: "Dürüst olun: bu gönüllü bir projedir ve 'acil', kaynak yaratmaz. / Be honest: this is a volunteer project and 'urgent' does not create capacity."
+      options:
+        - "Süresiz — duran bir soru / Standing question, no deadline"
+        - "Bu ay / This month"
+        - "Bu hafta / This week"
+    validations:
+      required: true
+  - type: textarea
+    id: known
+    attributes:
+      label: "Şimdiye kadar bilinen / What is already known"
+      description: "Elinizdeki kaynaklar, denediğiniz aramalar, bulduğunuz ve bulamadığınız şeyler. Boş bir talep, sıfırdan başlayan bir taleptir. / Sources you have, searches you tried, what you found and did not."
+  - type: textarea
+    id: where
+    attributes:
+      label: "Nereye bakılmalı / Where to look"
+      description: "Aklınıza gelen açık kaynaklar: resmî gazete, ihale kaydı, parlamento cevabı, uydu görüntüsü, akış. / Open sources you can think of."
+  - type: checkboxes
+    id: redlines
+    attributes:
+      label: "Kırmızı çizgiler / Red lines"
+      options:
+        - label: "Bu talep, Türk kuvvetlerinin konumu, hareketi veya tertibatıyla ilgili değildir. / This request is not about the position, movement or order of battle of Turkish forces."
+          required: true
+        - label: "Kişiler hakkında bilgi istemiyorum; hedefleme, zafiyet veya isabet noktası değerlendirmesi istemiyorum. / I am not asking about individuals, and not for targeting, vulnerability or aimpoint assessment."
+          required: true
+        - label: "Cevabın sahada gözlem gerektirmediğini, açık kaynaklardan aranabileceğini anlıyorum. / I understand the answer must be findable in open sources, never through observation in the field."
+          required: true
