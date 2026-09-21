@@ -76,6 +76,7 @@ Commit meta verileri herkese açıktır ve silinmesi zordur.
 | `triage` | Henüz değerlendirilmedi |
 | `data-submission` | Olay/kayıt önerisi |
 | `source-suggestion` | Yeni kaynak önerisi |
+| `bilgi-talebi` | Bir soru: cevabı açık kaynaklardan aranacak bilgi ihtiyacı (RFI) |
 | `correction` | Mevcut kayıtta hata |
 | `vocab-proposal` | Sözlük değişikliği önerisi |
 | `bug` | Araç veya platformda hata |
@@ -161,6 +162,7 @@ Commit metadata is public and hard to remove.
 | `triage` | Not yet assessed |
 | `data-submission` | Event/record submission |
 | `source-suggestion` | New source suggestion |
+| `bilgi-talebi` | A question to answer from open sources (request for information) |
 | `correction` | Error in an existing record |
 | `vocab-proposal` | Vocabulary change proposal |
 | `bug` | Bug in tools or platform |
