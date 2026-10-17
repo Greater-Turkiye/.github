@@ -126,6 +126,9 @@ jobs:
                `gh run watch --exit-status`. Read the logs of a failure, fix it, push, and run it again.
             5. When the checks are green, `gh pr merge --squash --delete-branch`. After three failed
                attempts to get them green, leave the pull request open and say exactly what blocks it.
+               If the branch rules require an approving review, never bypass them: request the review
+               from the OWNER (`gh pr edit <n> --add-reviewer <owner>`), turn on auto-merge
+               (`gh pr merge <n> --squash --auto --delete-branch`) and say so in the closing comment.
             6. Finish with one short comment on the issue in the issue's own language: what changed, the
                pull request, what was verified, and anything that genuinely needs the owner (their
                credentials, their account, or a file only they can produce) mentioning the OWNER above.

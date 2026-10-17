@@ -33,6 +33,7 @@ Notlar:
 - Claude Code (`vars.CLAUDE_MODEL`, varsayılan `claude-opus-5-5`; `vars.CLAUDE_EFFORT`, varsayılan `medium`) issue'yu baştan sona çözer: dal, değişiklik, CI, PR, squash-merge ve issue'ya kısa bir özet.
 - Yeni issue, `claude` etiketi ya da `@claude` geçen bir yorum tetikler. Veri, kaynak, düzeltme, sözlük, üyelik ve bilgi talebi formları kendi akışlarıyla kalır; `claude` etiketi eklenmedikçe atlanır.
 - Yalnızca depoya yazma yetkisi olan kişiler tetikleyebilir.
+- Dal kuralı onay istiyorsa Claude kuralı aşmaz: incelemeyi sahibinden ister, otomatik birleştirmeyi açar; onay gelince PR kendiliğinden birleşir.
 - Gerekenler: `secrets.CLAUDE_CODE_OAUTH_TOKEN` (`claude setup-token`) ve organizasyon ayarlarında "Allow GitHub Actions to create and approve pull requests". İsteğe bağlı `secrets.GT_BOT_TOKEN`, PR kontrollerinin kendiliğinden başlamasını sağlar. `vars.CLAUDE_ISSUES=off` her yerde durdurur.
 
 ## English
@@ -66,6 +67,7 @@ Notes:
 - Claude Code (`vars.CLAUDE_MODEL`, default `claude-opus-5-5`; `vars.CLAUDE_EFFORT`, default `medium`) resolves it end to end: branch, change, CI, pull request, squash-merge and a short summary on the issue.
 - A new issue, the `claude` label or a comment containing `@claude` starts it. Data, source, correction, vocabulary, membership and RFI forms keep their own flows and are skipped unless the `claude` label is added.
 - Only people with write access to the repository can start it.
+- Where the branch rules require an approving review, Claude never bypasses them: it requests the review from the owner and turns on auto-merge, so the pull request merges once approved.
 - Needs `secrets.CLAUDE_CODE_OAUTH_TOKEN` (`claude setup-token`) and the organisation setting "Allow GitHub Actions to create and approve pull requests". The optional `secrets.GT_BOT_TOKEN` makes the pull request checks start on their own. `vars.CLAUDE_ISSUES=off` stops it everywhere.
 
 ## Depo kurallari / Repository rules
