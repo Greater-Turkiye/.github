@@ -27,7 +27,7 @@ Notlar:
 
 ## Issue'ları Claude çözer
 
-`.github/workflows/claude-issues.yml`, organizasyondaki her deponun kendi `.github/workflows/claude.yml` dosyasından çağrılır ve GitHub Actions içinde çalışır; kimsenin bilgisayarının açık olması gerekmez.
+`.github/workflows/claude-issues.yml` (bu depo dahil) organizasyondaki her deponun kendi `.github/workflows/claude.yml` dosyasından çağrılır ve GitHub Actions içinde çalışır; kimsenin bilgisayarının açık olması gerekmez.
 
 - Yeni bir issue açıldığında `vars.GT_ISSUE_OWNER` kişisine (varsayılan `choi303`) atanır, bildirim hemen gider.
 - Claude Code (`vars.CLAUDE_MODEL`, varsayılan `claude-opus-5-5`; `vars.CLAUDE_EFFORT`, varsayılan `medium`) issue'yu baştan sona çözer: dal, değişiklik, CI, PR, squash-merge ve issue'ya kısa bir özet.
@@ -61,7 +61,7 @@ Notes:
 
 ## Issues are worked by Claude
 
-`.github/workflows/claude-issues.yml` is called from each repository's own `.github/workflows/claude.yml` and runs in GitHub Actions, so nobody's computer needs to be on.
+`.github/workflows/claude-issues.yml` is called (this repository included) from each repository's own `.github/workflows/claude.yml` and runs in GitHub Actions, so nobody's computer needs to be on.
 
 - A new issue is assigned to `vars.GT_ISSUE_OWNER` (default `choi303`), who is notified at once.
 - Claude Code (`vars.CLAUDE_MODEL`, default `claude-opus-5-5`; `vars.CLAUDE_EFFORT`, default `medium`) resolves it end to end: branch, change, CI, pull request, squash-merge and a short summary on the issue.
